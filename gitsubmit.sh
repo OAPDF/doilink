@@ -8,4 +8,4 @@ fi
 
 git add -A
 git commit -am "$comment"
-git push origin master
+git push origin gh-pages
