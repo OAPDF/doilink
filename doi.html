@@ -1,0 +1,32 @@
+<html>
+<head></head>
+<body>
+<script>
+var url=location.search;
+var Request = new Object();
+if(url.indexOf("?")!=-1){
+    var str = url.substr(1);
+    strs = str.split("&");
+    for(var i=0;i<strs.length;i++){
+       Request[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+    }
+}
+var doi=Request["doi"].toLowerCase().replace(/^\+*/g,'').replace(/^\s*/g,'').replace(/\s*$/g,'')
+if(doi.indexOf("10.")!=-1){
+	doi=doi.replace(/\//g,"@")
+	di=doi.indexOf("@")
+	var doi1=doi.slice(0,di)
+	var doi2=doi.slice(di+1)
+	var doiurl=doi1+"/"
+	if (doi2.length>5){
+		var count=Math.floor((doi2.length-1)/5)
+		for (var i=0;i<count;i++){
+			doiurl+=doi2.slice(i*5,(i+1)*5).replace(/\.*$/g,'')+"/"
+		}	
+	}
+	//alert(doiurl+doi)
+	window.location.href="http://oapdf.github.io/doilink/pages/"+doiurl+doi+".html"
+}
+</script>
+</body>
+</html>
